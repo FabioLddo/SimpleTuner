@@ -9,7 +9,7 @@ RUN apt-get update -y
 
 # Prevents different commands from being stuck by waiting
 # on user input during build
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install libg dependencies
 RUN apt install libgl1-mesa-glx -y
@@ -53,7 +53,7 @@ RUN apt-get update -y && apt-get install -y python3 python3-pip
 RUN python3 -m pip install pip --upgrade
 
 # HF
-ENV HF_HOME=/workspace/huggingface
+# ENV HF_HOME=/workspace/huggingface
 
 ENV POETRY_REQUESTS_MAX_RETRIES=3
 ENV POETRY_REQUESTS_TIMEOUT=150
@@ -81,3 +81,4 @@ COPY --chmod=755 docker-start.sh /start.sh
 # docker run --gpus all --rm -it -v $(pwd):/workspace -e WANDB_API_KEY=$WANDB_API_KEY -e HF_TOKEN=$HUGGING_FACE_HUB_TOKEN -p 7007:7007 floddo/simpletuner:latest bash
 # docker run --gpus all --rm -it -e WANDB_API_KEY=$WANDB_API_KEY -e HF_TOKEN=$HUGGING_FACE_HUB_TOKEN -p 7007:7007 floddo/simpletuner:v1.3.0 bash
 # docker run --gpus all -e WANDB_API_KEY=$WANDB_API_KEY -e HF_TOKEN=$HUGGING_FACE_HUB_TOKEN -p 22:22 simpletuner
+# docker run --gpus all --rm -it -e WANDB_API_KEY=$WANDB_API_KEY -e HF_TOKEN=$HUGGING_FACE_HUB_TOKEN floddo/simpletuner
